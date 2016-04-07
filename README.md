@@ -1,3 +1,3 @@
 # le-grand-défi
 
-Plues de détails à venir
+Plus de détails à venir
