@@ -1,0 +1,15 @@
+{
+  "name": "defi-endettement",
+  "version": "1.0.0",
+  "description": "Une application web pour encourager le désendettement citoyen.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Étienne Brouillard",
+  "license": "ISC",
+  "devDependencies": {
+    "jscs": "^2.11.0",
+    "jshint": "^2.9.1"
+  }
+}
