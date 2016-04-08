@@ -9,11 +9,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/"><i class="fa fa-home"></i></a></li>
-                <li><a href="/teams"><i class="fa fa-users"></i>Teams</a></li>
-                <li><a href="/member"><i class="fa fa-user"></i>Member</a></li>
-                <li><a href="/rolecall"><i class="fa fa-list-alt"></i>RoleCall</a></li>
-                <li><a href="/settings"><i class="fa fa-cog"></i>Settings</a></li>
+                <li><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
+                {{#if isSignedOut}}
+                    <li><a href="/SignIn"><i class="fa fa-sign-in fa-2x"></i></a></li>
+                {{/if}}
             </ul>
         </div>
     </div>
