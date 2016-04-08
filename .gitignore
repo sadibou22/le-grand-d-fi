@@ -28,6 +28,7 @@ node_modules
 bower_components
 bower
 public/lib
+public/bower
 
 # Optional npm cache directory
 .npm

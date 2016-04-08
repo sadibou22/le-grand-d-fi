@@ -1,0 +1,44 @@
+{
+  "name": "defi-endettement",
+  "description": "Une application web pour encourager le désendettement citoyen.",
+  "main": "app.js",
+  "authors": [
+    "Étienne Brouillard"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/efog/le-grand-d-fi",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "^4.5.0",
+    "bootstrap": "^3.3.6"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css",
+        "less/bootstrap.less"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "less/font-awesome.less",
+        "scss/font-awesome.scss",
+        "css/font-awesome.css",
+        "fonts/FontAwesome.otf",
+        "fonts/fontawesome-webfont.eot",
+        "fonts/fontawesome-webfont.svg",
+        "fonts/fontawesome-webfont.ttf",
+        "fonts/fontawesome-webfont.woff",
+        "fonts/fontawesome-webfont.woff2"
+      ]
+    }
+  }
+}
