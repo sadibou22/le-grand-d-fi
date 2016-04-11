@@ -14,7 +14,7 @@ gulp.task('injectBower', function() {
             directory: './public/bower',
             ignorePath: '../../public'
         };
-    return gulp.src('./views/**/*.html')
+    return gulp.src('./views/layouts/*.html')
         .pipe(stream(bowerOptions))
         .pipe(gulp.dest('./views'));
 });
@@ -29,7 +29,7 @@ gulp.task('injectApp', ['copyApp'], function() {
             {
                 read: false
             });
-    return gulp.src('./views/**/*.html')
+    return gulp.src('./views/layouts/*.html')
         .pipe(inject(injectSrc, injectOptions))
         .pipe(gulp.dest('./views'));
 });

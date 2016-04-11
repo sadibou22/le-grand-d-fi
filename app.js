@@ -2,14 +2,16 @@ var express = require('express'),
     exphbs = require('express-handlebars'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
-    oauthServer = require('oauth2-server-cookie'),
+    csurf = require('csurf'),
+    oauthServer = require('oauth2-server'),
     port = process.env.PORT || 9191,
     oauth2Model = require('./oauth2/mongodb-model'),
     isProd = process.env.NODE_ENV === 'production';
 
 var app = express();
+var csrfProtection = csurf({ cookie: true });
 
-app.use(cookieParser());
+app.use(cookieParser('session-secret'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -37,8 +39,8 @@ var signin = require('./controllers/signin-controller');
 var signup = require('./controllers/signup-controller');
 // app.oauth.authorise()
 app.get('/', home.index);
-app.get('/signin', signin.index);
-app.get('/signup', signup.index);
-app.post('/signup', signup.register);
+app.get('/signin', csrfProtection, signin.index);
+app.get('/signup', csrfProtection, signup.index);
+app.post('/signup', csrfProtection, signup.register);
 
 app.listen(port, function(err) { console.log('Running server on port ' + port); });

@@ -4,13 +4,19 @@ var model = module.exports,
     Schema = mongoose.Schema,
     _clientId = 'DefiDBWeb',
     _clientSecret = '$c4ecb4ef',
-    _dbUri = 'mongodb://defidbuser:dbpass@ds064748.mlab.com:64748/defidb';
+    _dbUri = 'mongodb://:@ds028679.mlab.com:28679/defidb2';
 
-mongoose.connect(_dbUri, function(err, res) {
-    if (err) { console.log('ERROR connecting to: ' + _dbUri + '. ' + err); }
-    else { console.log('Succeeded connected to: ' + _dbUri); }
-});
-
+var connect = function() {
+    var cb = function(err, res) {
+        if (err) {
+            console.log('ERROR connecting to: ' + _dbUri + '. ' + err);
+            setTimeout(connect, 10000);
+        }
+        else { console.log('Succeeded connected to: ' + _dbUri); }
+    };
+    mongoose.connect(_dbUri, cb);
+};
+connect();
 //
 // Schemas definitions
 //
