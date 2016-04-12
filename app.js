@@ -6,7 +6,8 @@ var express = require('express'),
     oauthServer = require('oauth2-server'),
     port = process.env.PORT || 9191,
     oauth2Model = require('./oauth2/mongodb-model'),
-    isProd = process.env.NODE_ENV === 'production';
+    isProd = process.env.NODE_ENV === 'production',
+    auth = require('./services/authentication');
 
 var app = express();
 var csrfProtection = csurf({ cookie: true });
@@ -31,6 +32,8 @@ app.engine('html', exphbs({
 }));
 app.set('view engine', 'html');
 
+app.use(auth.checkAuthentication);
+
 /**
  * Controllers
  */
@@ -39,7 +42,9 @@ var signin = require('./controllers/signin-controller');
 var signup = require('./controllers/signup-controller');
 // app.oauth.authorise()
 app.get('/', home.index);
+app.get('/oauthredirect', signin.oauthRedirect);
 app.get('/signin', csrfProtection, signin.index);
+app.post('/signin', csrfProtection, signin.validate);
 app.get('/signup', csrfProtection, signup.index);
 app.post('/signup', csrfProtection, signup.register);
 

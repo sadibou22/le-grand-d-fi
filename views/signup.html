@@ -1,36 +1,53 @@
 <div class="container">
     <h1>Registration</h1>
-    <form method="POST" data-toggle="validator" action="signup" role="form" id="signupform">
+    <form method="POST" data-toggle="validator" action="signup" role="form" id="signupform" class="vertical-form">
         <input type="hidden" name="_csrf" value="{{csrfToken}}">
         <div class="col-sm-12">
             <!-- Col0 -->
             <div class="col-sm-6">
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback  {{#if error.isUsernameError}} has-error {{/if}}">
                     <label for="username" class="col-sm-5 control-label">Username</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" pattern="\w*[a-zA-Z\-\.]\w*" data-pattern-error="error_text" data-minlength="5" data-minlength-error="Minimum of 5 characters" required name="username" id="username" placeholder="Enter Usermame"/>
-                        <div class="help-block with-errors"></div>
+                        <input type="text" value="{{ user.username }}" class="form-control" pattern="\w*[a-zA-Z\-\.]\w*" data-pattern-error="error_text"
+                        data-minlength="5" data-minlength-error="Minimum of 5 characters" required name="username" id="username"
+                        placeholder="Enter Usermame" />
+                        <div class="help-block with-errors">
+                            {{#if error.isUsernameError}}
+                            <ul class="list-unstyled">
+                                <li>Username already taken</li>
+                            </ul>
+                            {{/if}}
+                        </div>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label for="firstName" class="col-sm-5 control-label">First Name</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" pattern="\w*[a-zA-ZéèàêÉÈÀÊ\-]\w*" required name="firstName" id="firstName" placeholder="Enter First Name" />
+                        <input type="text" value="{{ user.firstName }}" class="form-control" pattern="\w*[a-zA-ZéèàêÉÈÀÊ\-]\w*" required name="firstName"
+                        id="firstName" placeholder="Enter First Name" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label for="lastName" class="col-sm-5 control-label">Last Name</label>
                     <div class="col-sm-7">
-                        <input type="text" pattern="\w*[a-zA-ZéèàêÉÈÀÊ\-]\w*" required name="lastName" class="form-control" id="lastName" placeholder="Enter Last Name" />
+                        <input type="text" value="{{ user.lastName }}" pattern="\w*[a-zA-ZéèàêÉÈÀÊ\-]\w*" required name="lastName" class="form-control"
+                        id="lastName" placeholder="Enter Last Name" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
-                <div class="form-group has-feedback">
+                <div class="form-group has-feedback {{#if error.isEmailError}} has-error {{/if}}">
                     <label for="email" class="col-sm-5 control-label">Email</label>
                     <div class="col-sm-7">
-                        <input type="email" class="form-control" required name="email" id="email" placeholder="Enter Email" />
-                        <div class="help-block with-errors"></div>
+                        <input type="email" value="{{ user.email }}" class="form-control" required name="email" id="email" placeholder="Enter Email"
+                        />
+                        <div class="help-block with-errors">
+                            {{#if error.isEmailError}}
+                            <ul class="list-unstyled">
+                                <li>Email is in use</li>
+                            </ul>
+                            {{/if}}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -40,14 +57,16 @@
                 <div class="form-group has-feedback">
                     <label for="password" class="col-sm-5 control-label">Pasword</label>
                     <div class="col-sm-7">
-                        <input type="password" class="form-control" data-minlength="7" data-minlength-error="Minimum is 7 characters" pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{8,10}$" required name="password" id="password" placeholder="Enter password" />      
+                        <input type="password" class="form-control" data-minlength="7" data-minlength-error="Minimum is 7 characters" pattern="^(?=.*[0-9])(?=.*[a-zA-Z]).{8,10}$"
+                        required name="password" id="password" placeholder="Enter password" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
                 <div class="form-group has-feedback">
                     <label for="confirmpassword" class="col-sm-5 control-label">Confirm Password</label>
                     <div class="col-sm-7">
-                        <input type="password" class="form-control" data-match="#password" data-match-error="Whoops, these don't match" required name="confirmpassword" id="confirmpassword" placeholder="Re-type password" />
+                        <input type="password" class="form-control" data-match="#password" data-match-error="Whoops, these don't match" required
+                        name="confirmpassword" id="confirmpassword" placeholder="Re-type password" />
                         <div class="help-block with-errors"></div>
                     </div>
                 </div>
@@ -60,7 +79,9 @@
                     <div class="col-sm-offset-5 col-sm-7">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="canBeContacted" name="canBeContacted" /> I can be contacted
+                                {{#if user.canBeContacted}}
+                                <input type="checkbox" checked="checked" id="canBeContacted" name="canBeContacted" /> {{else}}
+                                <input type="checkbox" id="canBeContacted" name="canBeContacted" /> {{/if}} I can be contacted
                             </label>
                         </div>
                     </div>

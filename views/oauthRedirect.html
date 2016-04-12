@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Sign in successful!</h1>
+</div>
+<script type="text/javascript">
+    (function(){    
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var token = '{{ token }}',
+                expires = '{{ expires }}';
+            if(typeof(Storage) !== "undefined") {
+                localStorage.setItem('access_token', JSON.stringify({ access_token: token, expires: expires }));
+            }
+            window.location = '/';            
+        });
+    })();
+
+</script>

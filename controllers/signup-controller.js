@@ -18,14 +18,21 @@ model.register = function(req, res, next) {
         isSignedOut: !(req.user && req.user.id),
         user: req.body
     };
-    try {
-        userService.saveUser(req.body, function(err, success) {
-            res.redirect('/');
-        });
-    }
-    catch (err) {
-        render(res, vm, err);
-    }
+    userService.saveUser(req.body, function(err, success) {
+        if (!err) {
+            //res.redirect('/');
+            res.redirect('/signin?from=signup&username=' + encodeURI(req.body.username));
+        }
+        else {
+            //We've got an error
+            vm.error = err;
+            vm.error.isUsernameError = err.code === 101;
+            vm.error.isEmailError = err.code === 102;
+            vm.user = req.body;
+            vm.csrfToken = req.csrfToken();
+            res.render(viewName, vm);
+        }
+    });
 };
 function render(res, vm, errors) {
     vm.errors = errors;

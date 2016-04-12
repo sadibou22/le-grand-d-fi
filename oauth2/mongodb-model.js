@@ -4,7 +4,7 @@ var model = module.exports,
     Schema = mongoose.Schema,
     _clientId = 'DefiDBWeb',
     _clientSecret = '$c4ecb4ef',
-    _dbUri = 'mongodb://:@ds028679.mlab.com:28679/defidb2';
+    _dbUri = 'mongodb://defidbuser:dbpass@ds028679.mlab.com:28679/defidb2';
 
 var connect = function() {
     var cb = function(err, res) {
@@ -45,7 +45,10 @@ var OAuthUsersSchema = new Schema({
     password: { type: String },
     firstname: { type: String },
     lastname: { type: String },
-    email: { type: String, default: '' }
+    email: { type: String, default: '' },
+    active: { type: Boolean, default: false },
+    canBeContacted: { type: Boolean, default: false },
+    isVisible: { type: Boolean, default: false }
 });
 
 mongoose.model('OAuthAccessTokens', OAuthAccessTokensSchema);

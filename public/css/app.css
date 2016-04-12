@@ -21,6 +21,6 @@ body {
 .dl-horizontal dt {
     white-space: normal;
 }
-#signupform .form-group{
+.vertical-form .form-group{
     padding-bottom: 30px;
 }
