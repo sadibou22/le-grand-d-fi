@@ -2,8 +2,8 @@ var model = module.exports;
 model.index = function(req, res, next) {
     var vm = {
         viewName: 'Home',
-        isSignedIn: (req.user && req.user.id),
-        isSignedOut: !(req.user && req.user.id)
+        isSignedIn: (req.username),
+        isSignedOut: !(req.username)
     };
     res.render('home', vm);
 };

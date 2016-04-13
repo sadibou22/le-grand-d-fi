@@ -5,8 +5,8 @@ var completeViewName = 'signup-complete';
 model.index = function(req, res, next) {
     var vm = {
         viewName: viewName,
-        isSignedIn: (req.user && req.user.id),
-        isSignedOut: !(req.user && req.user.id),
+        isSignedIn: (req.username),
+        isSignedOut: !(req.username),
         csrfToken: req.csrfToken()
     };
     res.render(viewName, vm);
@@ -14,8 +14,8 @@ model.index = function(req, res, next) {
 model.register = function(req, res, next) {
     var vm = {
         viewName: viewName,
-        isSignedIn: (req.user && req.user.id),
-        isSignedOut: !(req.user && req.user.id),
+        isSignedIn: (req.username),
+        isSignedOut: !(req.username),
         user: req.body
     };
     userService.saveUser(req.body, function(err, success) {

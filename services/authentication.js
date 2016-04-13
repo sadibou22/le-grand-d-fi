@@ -12,6 +12,7 @@ var checkAuthentication = function(req, res, next) {
             OAuthAccessTokensModel.findOne({ accessToken: token, clientId: _clientId }, function(err, result) {
                 if (!err && result) {
                     req.username = result.userId;
+                    req.accessToken = token;
                 }
                 next();
             });

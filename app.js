@@ -44,6 +44,7 @@ var signup = require('./controllers/signup-controller');
 app.get('/', home.index);
 app.get('/oauthredirect', signin.oauthRedirect);
 app.get('/signin', csrfProtection, signin.index);
+app.get('/signout', signin.signout);
 app.post('/signin', csrfProtection, signin.validate);
 app.get('/signup', csrfProtection, signup.index);
 app.post('/signup', csrfProtection, signup.register);

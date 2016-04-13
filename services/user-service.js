@@ -115,3 +115,15 @@ function storeToken(username, token, expires, callback) {
     tokenModel.save(callback);
 }
 model.validate = validate;
+
+/**
+ * Sign out user from token database
+ */
+function signout(accessToken, callback) {
+    model.validateToken(accessToken, function(err, result) {
+        if (result) { OAuthAccessTokensModel.remove({ accessToken: accessToken }, function(err, result) { callback(err, result); }); }
+        else if (err) { callback({ code: 107, msg: 'token not found', error: err }, null); }
+        else { callback(null, null); }
+    });
+}
+model.signout = signout;
