@@ -6,6 +6,7 @@ var _viewName = 'signin',
     _redirectViewName = 'oauthRedirect';
 
 model.index = function(req, res, next) {
+    if (req.username) { return res.redirect('/'); }
     var vm = {
         viewName: _viewName,
         isSignedIn: (req.username),
