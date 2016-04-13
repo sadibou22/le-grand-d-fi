@@ -32,7 +32,7 @@ app.engine('html', exphbs({
 }));
 app.set('view engine', 'html');
 
-app.use(auth.checkAuthentication);
+app.use(auth.setUser);
 
 /**
  * Controllers
@@ -40,9 +40,11 @@ app.use(auth.checkAuthentication);
 var home = require('./controllers/home-controller');
 var signin = require('./controllers/signin-controller');
 var signup = require('./controllers/signup-controller');
+var profile = require('./controllers/profile-controller');
 // app.oauth.authorise()
 app.get('/', home.index);
 app.get('/oauthredirect', signin.oauthRedirect);
+app.get('/profile', auth.authorize(), csrfProtection, profile.index);
 app.get('/signin', csrfProtection, signin.index);
 app.get('/signout', signin.signout);
 app.post('/signin', csrfProtection, signin.validate);
