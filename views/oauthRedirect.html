@@ -9,7 +9,11 @@
             if(typeof(Storage) !== "undefined") {
                 localStorage.setItem('access_token', JSON.stringify({ access_token: token, expires: expires }));
             }
-            window.location = '/';            
+            {{#if hasReturnUrl}}            
+            window.location = decodeURIComponent('{{returnUrl}}');          
+            {{else}}
+            window.location = '/';          
+            {{/if}}  
         });
     })();
 

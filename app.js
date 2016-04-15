@@ -7,7 +7,8 @@ var express = require('express'),
     port = process.env.PORT || 9191,
     oauth2Model = require('./oauth2/mongodb-model'),
     isProd = process.env.NODE_ENV === 'production',
-    auth = require('./services/authentication');
+    user = require('./services/user-handler'),
+    authorization = require('./services/authorization-handler');
 
 var app = express();
 var csrfProtection = csurf({ cookie: true });
@@ -32,22 +33,28 @@ app.engine('html', exphbs({
 }));
 app.set('view engine', 'html');
 
-app.use(auth.setUser);
+app.use(user.setUser);
 
 /**
  * Controllers
  */
 var home = require('./controllers/home-controller');
+var passwordreset = require('./controllers/passwordreset-controller');
+var profile = require('./controllers/profile-controller');
 var signin = require('./controllers/signin-controller');
 var signup = require('./controllers/signup-controller');
-var profile = require('./controllers/profile-controller');
+
 // app.oauth.authorise()
 app.get('/', home.index);
 app.get('/oauthredirect', signin.oauthRedirect);
-app.get('/profile', auth.authorize(), csrfProtection, profile.index);
+app.get('/profile', authorization(), csrfProtection, profile.index);
+app.get('/reinitialize', csrfProtection, passwordreset.showChangePassword);
+app.post('/reinitialize', csrfProtection, passwordreset.doChangePassword);
+app.get('/reset', csrfProtection, passwordreset.showRequestCode);
+app.post('/reset', csrfProtection, passwordreset.doRequestCode);
 app.get('/signin', csrfProtection, signin.index);
-app.get('/signout', signin.signout);
 app.post('/signin', csrfProtection, signin.validate);
+app.get('/signout', signin.signout);
 app.get('/signup', csrfProtection, signup.index);
 app.post('/signup', csrfProtection, signup.register);
 

@@ -1,15 +1,15 @@
 <div class="container">
-    <h1>Sign in!</h1>
-    {{#if invalidLogin }}
+    <h1>Sign in!</h1> {{#if invalidLogin }}
     <div class="alert alert-danger" role="alert">
         Invalid username or password
     </div>
-    {{/if}}     
+    {{/if}}
     <form method="POST" data-toggle="validator" action="signin" role="form" id="signinform" class="vertical-form">
-        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        <input type="hidden" name="_csrf" value="{{csrfToken}}"> {{#if returnUrl}}
+        <input type="hidden" name="returnUrl" value="{{returnUrl}}"> {{/if}}
         <div class="col-sm-4">
             <div class="form-group has-feedback">
-                <label for="username" class="col-sm-5 control-label">username</label>
+                <label for="username" class="col-sm-5 control-label">Username</label>
                 <div class="col-sm-7">
                     <input type="text" value="{{ username }}" class="form-control" required name="username" id="username" placeholder="Enter username"
                     />
@@ -20,6 +20,13 @@
                 <div class="col-sm-7">
                     <input type="password" class="form-control" required name="password" id="password" />
                 </div>
+            </div>
+            <div class="form-group has-feedback">
+                {{#if invalidLogin }}
+                <a class="col-sm-offset-5 col-sm-7" href="/reset?username={{username}}">Password forgotten...</a>
+                {{else}}
+                <a class="col-sm-offset-5 col-sm-7" href="/reset">Password forgotten...</a>
+                {{/if}}
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-7">

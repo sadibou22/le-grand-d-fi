@@ -45,6 +45,7 @@ var OAuthUsersSchema = new Schema({
     password: { type: String },
     firstname: { type: String },
     lastname: { type: String },
+    displayname: { type: String },
     email: { type: String, default: '' },
     active: { type: Boolean, default: false },
     canBeContacted: { type: Boolean, default: false },

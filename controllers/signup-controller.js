@@ -28,6 +28,7 @@ model.register = function(req, res, next) {
             vm.error = err;
             vm.error.isUsernameError = err.code === 101;
             vm.error.isEmailError = err.code === 102;
+            vm.error.isPasswordMismatchError = err.code === 107;
             vm.user = req.body;
             vm.csrfToken = req.csrfToken();
             res.render(viewName, vm);
