@@ -10,6 +10,7 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower/font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="/bower/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower/angular-ui/build/angular-ui.css" />
     <!-- endbower -->
     <!-- inject:css -->
     <link rel="stylesheet" href="/dist/css/app.css">
@@ -17,7 +18,7 @@
 </head>
 
 <body>
-    <header>
+    <header>    
         {{> navbar}}
     </header>
     <div class="body-content">
@@ -27,11 +28,14 @@
     <script src="/bower/jquery/dist/jquery.js"></script>
     <script src="/bower/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/bower/bootstrap-validator/dist/validator.js"></script>
+    <script src="/bower/angular/angular.js"></script>
+    <script src="/bower/angular-ui/build/angular-ui.js"></script>
     <!-- endbower -->
     <!-- inject:js -->
     <script src="/dist/js/app.js"></script>
     <script src="/dist/js/gui.js"></script>
     <!-- endinject -->
+    <script src="//cdn.socket.io/socket.io-1.4.5.js"></script>
 </body>
 
 </html>

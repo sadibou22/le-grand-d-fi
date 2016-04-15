@@ -4,7 +4,7 @@ var model = module.exports,
     Schema = mongoose.Schema,
     _clientId = 'DefiDBWeb',
     _clientSecret = '$c4ecb4ef',
-    _dbUri = 'mongodb://defidbuser:dbpass@ds028679.mlab.com:28679/defidb2';
+    _dbUri = 'mongodb://appdbuser:dbpass@ds028679.mlab.com:28679/defidb2';
 
 var connect = function() {
     var cb = function(err, res) {

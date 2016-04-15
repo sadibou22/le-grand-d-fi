@@ -79,10 +79,7 @@ function validate(username, password, callback) {
 function getUserByUsernamePassword(username, passwordHash, callback) {
     OAuthUsersModel.findOne({ username: username, password: passwordHash },
         function (err, result) {
-            if (err) {
-                callback({ code: 104, msg: 'invalid credentials' }, err);
-            }
-            if (!result) {
+            if (err || !result) {
                 callback({ code: 104, msg: 'invalid credentials' }, null);
             }
             else {

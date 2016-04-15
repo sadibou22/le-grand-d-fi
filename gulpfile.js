@@ -16,7 +16,7 @@ gulp.task('injectBower', function() {
         };
     return gulp.src('./views/layouts/*.html')
         .pipe(stream(bowerOptions))
-        .pipe(gulp.dest('./views'));
+        .pipe(gulp.dest('./views/layouts'));
 });
 
 gulp.task('injectApp', ['copyApp'], function() {
