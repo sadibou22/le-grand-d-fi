@@ -3,15 +3,12 @@
 
     angular
         .module('app')
-        .service('userService', userService);
+        .service('UserService', UserService);
 
-    userService.$inject = [];
-    function userService() {
-        var service = {};
-        service.exposedFn = exposedFn;
-        return service;
+    UserService.$inject = [];
+    function UserService() {
+        this.exposedFn = exposedFn;
         ////////////////
-
         function exposedFn() { }
     }
 })();

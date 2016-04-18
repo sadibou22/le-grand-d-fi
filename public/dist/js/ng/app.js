@@ -1,49 +1,24 @@
 (function () {
     'use strict';
     var app = angular.module('app', [
-        'ngRoute'
+        'ui.router'
     ]);
-    app.constant('routes', getRoutes());
-    function getRoutes() {
-        return [
-            {
+    app.config(function ($stateProvider, $urlRouterProvider) {
+        //
+        // For any unmatched url, redirect to /
+        $urlRouterProvider.otherwise('/');
+        //
+        // Now set up the states
+        $stateProvider
+            .state('home', {
                 url: '/',
-                config: {
-                    title: 'home',
-                    templateUrl: '/js/ng/views/home.html',
-                    settings: {}
+                views: {
+                    'stats': { templateUrl: '/js/ng/views/stats.html', },
+                    'profile': { templateUrl: '/js/ng/views/profile.html' }
                 }
-            }
-        ];
-    }    
-    app.config(['$httpProvider', '$provide', '$routeProvider', appConfigurator]);
-    function appConfigurator($httpProvider, $provide, $routeProvider) {
-        $provide.factory('$routeProvider', function() {
-            return $routeProvider;
-        });
-        $provide.decorator('$exceptionHandler', function($delegate, $injector) {
-            return function(exception, cause) {
-                $delegate(exception, cause);
-            };
-        });
-    }
-    app.run(['$http', '$location', '$rootScope', '$injector', '$route', '$routeProvider', 'routes', run]);
-    function run($http, $location, $rootScope, $injector, $route, $routeProvider, routes) {
-        routes.forEach(function(r) {
-            setRoute(r.url, r.config);
-        });
-        $routeProvider.otherwise({ redirectTo: '/' });
-        $route.reload();
-
-        function setRoute(url, config) {
-            config.resolve = angular.extend(config.resolve || {}, {
             });
-            $routeProvider.when(url, config);
-            if (config.editUrl) {
-                $routeProvider.when(config.editUrl, config);
-            }
-        }
-        $rootScope.$on('$routeChangeStart', function(event, next, current) {
-        });
+    });
+    app.run(['$http', '$location', '$rootScope', '$injector', run]);
+    function run($http, $location, $rootScope, $injector) {
     }
 })();

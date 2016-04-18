@@ -7,25 +7,26 @@ var express = require('express'),
     port = process.env.PORT || 9191,
     oauth2Model = require('./oauth2/mongodb-model'),
     isProd = process.env.NODE_ENV === 'production',
+    statsServer = require('./services/stats-server'),
     user = require('./services/user-handler'),
     authorization = require('./services/authorization-handler');
 
-var app = express();
 var csrfProtection = csurf({ cookie: true });
 
+var app = express();
 app.use(cookieParser('session-secret'));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-oauth2Model.warmUp(function(res) { console.log('Database warmed up'); });
+oauth2Model.warmUp(function (res) { console.log('Database warmed up'); });
 app.oauth = oauthServer({
     model: oauth2Model,
     grants: ['password'],
     debug: true
 });
-app.all('/oauth/token', app.oauth.grant());
 
+app.all('/oauth/token', app.oauth.grant());
 app.use(express.static('public'));
 app.engine('html', exphbs({
     defaultLayout: 'main',
@@ -36,7 +37,15 @@ app.set('view engine', 'html');
 app.use(user.setUser);
 
 /**
- * Controllers
+ * Socket.io
+ */
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var statsServer = new statsServer.Server({io: io});
+app.use(statsServer.stats);
+
+/**
+ * Page controllers
  */
 var home = require('./controllers/home-controller');
 var passwordreset = require('./controllers/passwordreset-controller');
@@ -58,4 +67,4 @@ app.get('/signout', signin.signout);
 app.get('/signup', csrfProtection, signup.index);
 app.post('/signup', csrfProtection, signup.register);
 
-app.listen(port, function(err) { console.log('Running server on port ' + port); });
+http.listen(port, function (err) { console.log('Running server on port ' + port); });

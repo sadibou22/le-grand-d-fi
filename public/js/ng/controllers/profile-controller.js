@@ -3,13 +3,17 @@
 
     angular
         .module('app')
-        .controller('HomeController', HomeController);
+        .controller('ProfileController', ProfileController);
 
-    HomeController.$inject = ['userService'];
-    function HomeController(userService) {
+    ProfileController.$inject = ['$http'];
+    function ProfileController($http) {
         var vm = this;
+
+
         activate();
+
         ////////////////
+
         function activate() { }
     }
 })();

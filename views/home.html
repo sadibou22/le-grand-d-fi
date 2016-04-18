@@ -1,3 +1,6 @@
 <div class="container" ng-app="app">
-    <div ng-view=""></div>
+    <div ui-view="stats"></div>
+    {{#if isSignedIn}}
+    <div ui-view="profile"></div>
+    {{/if}}
 </div>
