@@ -31,7 +31,7 @@ gulp.task('injectApp', ['copyApp'], function() {
             });
     return gulp.src('./views/layouts/*.html')
         .pipe(inject(injectSrc, injectOptions))
-        .pipe(gulp.dest('./views'));
+        .pipe(gulp.dest('./views/layouts'));
 });
 gulp.task('copyApp', function() {
     var path = './public/dist';

@@ -20,7 +20,8 @@
     "bootstrap": "^3.3.6",
     "bootstrap-validator": "^0.10.1",
     "angular": "^1.5.4",
-    "angular-ui": "^0.4.0"
+    "angular-ui": "^0.4.0",
+    "angular-route": "^1.5.3"
   },
   "overrides": {
     "angular": {
