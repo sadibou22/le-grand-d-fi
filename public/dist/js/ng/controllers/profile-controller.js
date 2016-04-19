@@ -9,6 +9,10 @@
     function ProfileController($http) {
         var vm = this;
 
+        vm.new = {
+            name: undefined,
+            amount: 0
+        };
 
         activate();
 

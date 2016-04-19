@@ -52,8 +52,8 @@ model.oauthRedirect = function(req, res, next) {
     var vm = new SignInModel();
     userService.validateToken(vm.token, function(err, result) {
         if (!err && result) {
-            res.cookie('access_token', result.accessToken, { maxAge: 900000, httpOnly: true });
-            res.cookie('expires', result.expires, { maxAge: 900000, httpOnly: true });
+            res.cookie('access_token', result.accessToken, { maxAge: 900000000, httpOnly: true});
+            res.cookie('expires', result.expires, { maxAge: 900000000, httpOnly: true });
             return res.render(_redirectViewName, vm);
         }
         else { return res.render('/'); }
@@ -61,8 +61,8 @@ model.oauthRedirect = function(req, res, next) {
 };
 model.signout = function(req, res, next) {
     userService.signout(req.accessToken, function(err, result) {
-        res.cookie('access_token', '', { maxAge: 900000, httpOnly: true });
-        res.cookie('expires', '', { maxAge: 900000, httpOnly: true });
+        res.cookie('access_token', '', { maxAge: 1, httpOnly: true });
+        res.cookie('expires', '', { maxAge: 1, httpOnly: true });
         res.redirect('/');
     });
 };

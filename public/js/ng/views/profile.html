@@ -1,3 +1,33 @@
 <div ng-controller="ProfileController as vm">
-    <h1>Profile</h1>
+    <h1>Your Profile</h1>
+    <p>
+        Your debt profile lets you record any debts you have. Are considered debts: credit cards, personal/car loans, credit margins
+        or any money you owe not backed by an asset which has a residual value. For example, a mortgage is not a debt unless
+        you borrow off the reimbursed capital. Student loans are also excluded.
+    </p>
+    <div class="col-sm-12">
+        <h2>Add a debt here</h2>
+        <form method="POST" data-toggle="validator" role="form" name="addDebtForm" action="add" id="addDebtForm" class="horizontal-form">
+            <div class="col-sm-4 form-group">
+                <label for="name" class="col-sm-3 control-label">Name</label>
+                <div class="col-sm-9">
+                    <input type="text" ng-model="vm.new.name" class="form-control" pattern="\w*[a-zA-Z\-\.]\w*" data-pattern-error="error_text"
+                        data-minlength="5" data-minlength-error="Minimum of 5 characters" required name="name" id="name" placeholder="Enter Debt Name"
+                    />
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <label for="amount" class="col-sm-3 control-label">Value</label>
+                <div class="col-sm-9">
+                    <input type="number" ng-model="vm.new.amount" class="form-control" pattern="[0-9]+[\.,]*[0-9]{0,2}" data-pattern-error="error_text"
+                        required name="amount" id="amount" placeholder="Enter Debt Value" />
+                </div>
+            </div>
+            <div class="col-sm-4 form-group">
+                <div class="col-sm-7">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>

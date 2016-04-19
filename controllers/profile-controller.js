@@ -4,7 +4,7 @@ var profileService = require('../services/profile-service.js'),
 
 var _viewName = 'profile';
 
-model.index = function(req, res) {
+model.index = function (req, res) {
     var vm = {
         viewName: _viewName,
         isSignedIn: (req.username),

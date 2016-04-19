@@ -9,11 +9,16 @@
     function ProfileController($http) {
         var vm = this;
 
+        vm.new = {
+            name: undefined,
+            amount: 0
+        };
+        vm.debts = [];
+        vm.sum = 0;
 
         activate();
-
-        ////////////////
-
-        function activate() { }
+        function activate() {
+            
+         }
     }
 })();
