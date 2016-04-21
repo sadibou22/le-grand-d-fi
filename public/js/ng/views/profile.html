@@ -7,12 +7,12 @@
     </p>
     <div class="col-sm-12">
         <h2>Add a debt here</h2>
-        <form method="POST" data-toggle="validator" role="form" name="addDebtForm" action="add" id="addDebtForm" class="horizontal-form">
+        <form method="POST" data-toggle="validator" role="form" name="addDebtForm" id="addDebtForm" class="horizontal-form">
             <div class="col-sm-4 form-group">
                 <label for="name" class="col-sm-3 control-label">Name</label>
                 <div class="col-sm-9">
                     <input type="text" ng-model="vm.new.name" class="form-control" pattern="\w*[a-zA-Z\-\.]\w*" data-pattern-error="error_text"
-                        data-minlength="5" data-minlength-error="Minimum of 5 characters" required name="name" id="name" placeholder="Enter Debt Name"
+                    data-minlength="5" data-minlength-error="Minimum of 5 characters" required name="name" id="name" placeholder="Enter Debt Name"
                     />
                 </div>
             </div>
@@ -20,12 +20,12 @@
                 <label for="amount" class="col-sm-3 control-label">Value</label>
                 <div class="col-sm-9">
                     <input type="number" ng-model="vm.new.amount" class="form-control" pattern="[0-9]+[\.,]*[0-9]{0,2}" data-pattern-error="error_text"
-                        required name="amount" id="amount" placeholder="Enter Debt Value" />
+                    required name="amount" id="amount" placeholder="Enter Debt Value" />
                 </div>
             </div>
             <div class="col-sm-4 form-group">
                 <div class="col-sm-7">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" ng-class="{'disabled': addDebtForm.$invalid }" class="btn btn-primary">Add</button>
                 </div>
             </div>
         </form>
